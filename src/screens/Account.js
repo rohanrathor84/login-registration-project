@@ -14,12 +14,12 @@ const Account = props => {
   };
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.welcomeText}>Welcome Rohan Kumar</Text>
+      <Text style={styles.welcomeText}>{'Welcome Rohan Kumar'}</Text>
       <TouchableOpacity
         style={styles.logoutBtn}
         activeOpacity={0.8}
         onPress={onLogOutClick}>
-        <Text style={styles.logoutText}>Logout</Text>
+        <Text style={styles.logoutText}>{'Logout'}</Text>
       </TouchableOpacity>
     </View>
   );

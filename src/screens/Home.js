@@ -6,6 +6,7 @@ import {
   Modal,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import ErrorScreen from '../components/common/ErrorScreen';
@@ -18,6 +19,7 @@ import {
   gray500,
   gray600,
   gray700,
+  gray800,
   gray900,
   placeHolderColor,
   white,
@@ -108,45 +110,19 @@ const Home = props => {
 
   const renderItem = ({item, index}) => {
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          marginHorizontal: 20,
-          backgroundColor: white,
-          marginBottom: 8,
-          borderRadius: 3,
-          padding: 5,
-        }}>
-        <Image
-          source={{uri: item.avatar}}
-          style={{
-            height: 100,
-            width: 100,
-            alignSelf: 'center',
-            backgroundColor: placeHolderColor,
-          }}
-        />
-        <View style={{marginStart: 8}}>
-          <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <Text
-              style={{
-                fontSize: 16,
-                color: gray700,
-                fontWeight: '600',
-              }}
-              numberOfLines={2}>
+      <View style={styles.renderStyle} key={index}>
+        <Image source={{uri: item.avatar}} style={styles.imgStyle} />
+        <View style={styles.itemSeperation}>
+          <View style={styles.userDetailView}>
+            <Text style={styles.nameStyle} numberOfLines={2}>
               {item.first_name}
             </Text>
-            <Text
-              style={{fontSize: 16, color: gray700, fontWeight: '600'}}
-              numberOfLines={2}>
+            <Text style={styles.nameStyle} numberOfLines={2}>
               {' '}
               {item.last_name}
             </Text>
           </View>
-          <Text
-            style={{fontSize: 14, color: gray600, fontWeight: '400'}}
-            numberOfLines={2}>
+          <Text style={styles.subDetailStyle} numberOfLines={2}>
             {item.email}
           </Text>
         </View>
@@ -155,21 +131,8 @@ const Home = props => {
   };
   return (
     <View style={styles.mainContainerStyle}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: 20,
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontSize: 20,
-            color: gray900,
-            fontWeight: '400',
-            width: '80%',
-          }}
-          numberOfLines={1}>
+      <View style={styles.topComtainer}>
+        <Text style={styles.welcomeTextStyle} numberOfLines={1}>
           {'Welcome to users homepage'}
         </Text>
         <MaterialCommunityIcons
@@ -197,39 +160,22 @@ const Home = props => {
         animationType={'fade'}
         onRequestClose={onRequestClose}
         transparent={true}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: blackShin5A,
-          }}>
-          <View
-            style={{
-              width: '60%',
-              backgroundColor: white,
-              paddingVertical: 20,
-              paddingHorizontal: 20,
-              borderRadius: 8,
-            }}>
-            <Text style={{marginTop: -10, marginStart: -10}}>Sort By</Text>
-            <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text onPress={defaultSortBy}>Default</Text>
-              <View
-                style={{
-                  height: 1,
-                  width: '95%',
-                  backgroundColor: gray400,
-                  marginVertical: 5,
-                }}></View>
-              <Text onPress={nameSortBy}>Name</Text>
+        <TouchableWithoutFeedback onPress={onRequestClose}>
+          <View style={styles.sortModalVIew}>
+            <View style={styles.sortModalSubVIew}>
+              <Text style={styles.sortByText}>{'Sort By'}</Text>
+              <View style={styles.optionaView}>
+                <Text onPress={defaultSortBy} style={styles.optionTextStyle}>
+                  {'Default'}
+                </Text>
+                <View style={styles.divederStyle}></View>
+                <Text onPress={nameSortBy} style={styles.optionTextStyle}>
+                  {'Name'}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
@@ -242,4 +188,68 @@ const styles = StyleSheet.create({
     backgroundColor: gray200,
     flex: 1,
   },
+  topComtainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+    alignItems: 'center',
+  },
+  welcomeTextStyle: {
+    fontSize: 20,
+    color: gray900,
+    fontWeight: '400',
+    width: '80%',
+  },
+  sortModalVIew: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: blackShin5A,
+  },
+  sortModalSubVIew: {
+    width: '60%',
+    backgroundColor: white,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  sortByText: {
+    marginTop: -10,
+    marginStart: -10,
+    color: gray800,
+    fontWeight: '500',
+  },
+  optionaView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  divederStyle: {
+    height: 1,
+    width: '95%',
+    backgroundColor: gray400,
+    marginVertical: 5,
+  },
+  renderStyle: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    backgroundColor: white,
+    marginBottom: 8,
+    borderRadius: 3,
+    padding: 5,
+  },
+  imgStyle: {
+    height: 100,
+    width: 100,
+    alignSelf: 'center',
+    backgroundColor: placeHolderColor,
+  },
+  itemSeperation: {marginStart: 8},
+  userDetailView: {flexDirection: 'row', marginBottom: 5},
+  nameStyle: {
+    fontSize: 16,
+    color: gray700,
+    fontWeight: '600',
+  },
+  subDetailStyle: {fontSize: 14, color: gray600, fontWeight: '400'},
+  optionTextStyle: {fontSize: 14, color: gray600, fontWeight: '500'},
 });

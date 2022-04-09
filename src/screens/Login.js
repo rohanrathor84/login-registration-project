@@ -14,7 +14,9 @@ import {
   blackShin5A,
   gray300,
   gray400,
+  gray600,
   gray800,
+  gray900,
   orange400,
   red600,
   white,
@@ -133,7 +135,7 @@ const Login = props => {
         </View>
       </KeyboardAvoidingView>
       <View style={styles.titleView}>
-        <Text style={styles.titleTextStyle}>Please Login</Text>
+        <Text style={styles.titleTextStyle}>{'Please Login'}</Text>
       </View>
 
       {showLoading ? (
@@ -153,7 +155,7 @@ const Login = props => {
           <View style={styles.viewBox}>
             <Text style={styles.msgTextStyle}>{msg}</Text>
             <Text style={styles.okTextStyle} onPress={onRequestClose}>
-              Ok
+              {'Ok'}
             </Text>
           </View>
         </View>
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   titleView: {position: 'absolute', top: 15, left: 15},
-  titleTextStyle: {fontSize: 18, marginBottom: 30},
+  titleTextStyle: {fontSize: 18, marginBottom: 30, color: gray900},
   modalViewContainer: {
     flex: 1,
     alignItems: 'center',
@@ -208,10 +210,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 8,
   },
-  msgTextStyle: {textAlign: 'center'},
+  msgTextStyle: {textAlign: 'center', color: gray600, fontSize: 14},
   okTextStyle: {
     paddingHorizontal: 20,
     paddingTop: 20,
+    color: gray800,
+    fontSize: 16,
   },
   loadingView: {
     position: 'absolute',

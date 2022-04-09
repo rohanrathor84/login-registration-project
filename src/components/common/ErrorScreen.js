@@ -12,14 +12,14 @@ const ErrorScreen = props => {
   const {msg, retry} = props;
   return (
     <View style={styles.mainContainer}>
-      <View style={{width: Dimensions.get('screen').width * 0.85}}>
-        <Text style={[{textAlign: 'center'}]}>{msg}</Text>
+      <View style={styles.msgCOntainer}>
+        <Text style={styles.msgText}>{msg}</Text>
       </View>
       <TouchableOpacity
         style={[styles.textStyle]}
         activeOpacity={1}
         onPress={retry}>
-        <Text style={[{textAlignVertical: 'center'}]}>{'Retry'}</Text>
+        <Text style={styles.retryText}>{'Retry'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -39,4 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
   },
+  msgCOntainer: {width: Dimensions.get('screen').width * 0.85},
+  msgText: {textAlign: 'center', color: gray600},
+  retryText: {textAlignVertical: 'center', color: gray600},
 });

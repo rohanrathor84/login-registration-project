@@ -35,11 +35,11 @@ const LoginSignUp = props => {
       </Text>
       <View style={styles.btnView}>
         <Pressable style={styles.loginBtnViewStyle} onPress={onLoginPress}>
-          <Text style={styles.btnTextStyle}>Login</Text>
+          <Text style={styles.btnTextStyle}>{'Login'}</Text>
         </Pressable>
 
         <Pressable style={styles.signUpBtnViewStyle} onPress={onSignUpPress}>
-          <Text style={styles.btnTextStyle}>Sign-Up</Text>
+          <Text style={styles.btnTextStyle}>{'Sign-Up'}</Text>
         </Pressable>
       </View>
       <Text style={styles.tAndcStyle}>

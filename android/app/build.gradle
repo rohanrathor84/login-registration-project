@@ -220,6 +220,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('/home/rohan/Documents/singned apk keys/loginRegistration.jks')
+            storePassword 'login1'
+            keyPassword 'login1'
+            keyAlias 'loginRegistration'
+        }
     }
     buildTypes {
         debug {
@@ -231,7 +237,7 @@ android {
             // see https://reactnative.dev/docs/signed-apk-android.
             shrinkResources true
             debuggable false
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
