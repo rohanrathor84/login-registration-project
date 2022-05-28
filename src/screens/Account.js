@@ -2,8 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {gray800, white} from '../resources/Colors';
+import {useSelector} from 'react-redux';
 
 const Account = props => {
+  const {name, email} = useSelector(state => state.userReducer);
+
   const onLogOutClick = () => {
     AsyncStorage.setItem('token', '');
     AsyncStorage.setItem('showLoginSignUp', 'true');
@@ -14,7 +17,10 @@ const Account = props => {
   };
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.welcomeText}>{'Welcome Rohan Kumar'}</Text>
+      <View style={styles.topView}>
+        <Text style={styles.welcomeText}>{`Welcome ${name} `}</Text>
+        <Text style={styles.emailView}>{email}</Text>
+      </View>
       <TouchableOpacity
         style={styles.logoutBtn}
         activeOpacity={0.8}
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-  welcomeText: {margin: 20, fontSize: 18, color: gray800},
+  welcomeText: {fontSize: 18, color: gray800},
   logoutBtn: {
     marginBottom: 20,
     paddingVertical: 20,
@@ -43,4 +49,12 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   logoutText: {color: gray800, fontSize: 16},
+  emailView: {
+    fontSize: 18,
+    color: gray800,
+    marginTop: 10,
+  },
+  topView: {
+    margin: 20,
+  },
 });

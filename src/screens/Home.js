@@ -6,6 +6,7 @@ import {
   Modal,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -27,6 +28,8 @@ import {
 import UseAxios, {MethodType} from '../utils/network/UseAxios';
 import {checkNetworkConnected} from '../utils/Util';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {setName, setEmail, getUsers} from '../redux/actions';
 
 const Home = props => {
   const [users, setUsers] = useState([]);
@@ -35,6 +38,9 @@ const Home = props => {
   const [errMsg, setErrMsg] = useState('');
   const [sortByModalVisible, setSortByModalVisible] = useState(false);
   const [extraData, setExtraData] = useState(false);
+
+  const dispatch = useDispatch();
+  // const {users} = useSelector(state => state.userReducer);
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,6 +52,7 @@ const Home = props => {
     };
     checkNetworkConnected(isConnected => {
       if (isConnected) {
+        // dispatch(getUsers())
         UseAxios(apiObj)
           .then(response => {
             setIsLoading(false);
@@ -108,9 +115,18 @@ const Home = props => {
     onRequestClose();
   };
 
+  const onItemPress = item => {
+    dispatch(setName(item.first_name));
+    dispatch(setEmail(item.email));
+  };
+
   const renderItem = ({item, index}) => {
     return (
-      <View style={styles.renderStyle} key={index}>
+      <TouchableOpacity
+        style={styles.renderStyle}
+        key={index}
+        activeOpacity={0.8}
+        onPress={() => onItemPress(item)}>
         <Image source={{uri: item.avatar}} style={styles.imgStyle} />
         <View style={styles.itemSeperation}>
           <View style={styles.userDetailView}>
@@ -126,7 +142,7 @@ const Home = props => {
             {item.email}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (

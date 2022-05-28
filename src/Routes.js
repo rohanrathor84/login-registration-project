@@ -10,6 +10,10 @@ import Login from './screens/Login';
 import Registration from './screens/Registration';
 import {gray400, white, redShade, gray800, gray200} from './resources/Colors';
 import LoginSignUp from './components/LoginSignUp';
+import {Provider} from 'react-redux';
+import {Store} from './redux/store';
+import PlaceHolderHome from './screens/PlaceHolderHome';
+import PleaceHolderDetail from './screens/PleaceHolderDetail';
 
 const Routes = () => {
   const Tab = createBottomTabNavigator();
@@ -56,22 +60,32 @@ const Routes = () => {
   }
 
   return (
-    <SafeAreaView style={styles.mainContainerStyle}>
-      <NavigationContainer independent={true}>
-        <Stack.Navigator
-          initialRouteName={'LoginSignUp'}
-          screenOptions={screenOptions}
-          backBehavior="history">
-          <Stack.Screen name={'LoginSignUp'} component={LoginSignUp} />
-          <Stack.Screen name={'Login'} component={Login} />
-          <Stack.Screen name={'Registration'} component={Registration} />
-          <Stack.Screen
-            name={'BottomTabScreens'}
-            component={BottomTabScreens}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <Provider store={Store}>
+      <SafeAreaView style={styles.mainContainerStyle}>
+        <NavigationContainer independent={true}>
+          <Stack.Navigator
+            initialRouteName={'PlaceHolderHome'}
+            screenOptions={screenOptions}
+            backBehavior="history">
+            <Stack.Screen
+              name={'PlaceHolderHome'}
+              component={PlaceHolderHome}
+            />
+            <Stack.Screen
+              name={'PleaceHolderDetail'}
+              component={PleaceHolderDetail}
+            />
+            {/* <Stack.Screen name={'LoginSignUp'} component={LoginSignUp} />
+            <Stack.Screen name={'Login'} component={Login} />
+            <Stack.Screen name={'Registration'} component={Registration} />
+            <Stack.Screen
+              name={'BottomTabScreens'}
+              component={BottomTabScreens}
+            /> */}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 };
 
